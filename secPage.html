@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScoutFare</title>
+    <link rel="stylesheet" href="./mainpage.css">
+
+</head>
+<body>
+        <div class="header">Ride Price Comparison</div>
+        <div class="container">
+            <h2>Find the Best Ride for Your Trip</h2>
+            <br>
+            <div class="form-group">
+                <label for="pickup">Pickup Location</label>
+                <img src="pickup.png" alt="" height="27px" width="27px">
+                <input type="text" id="pickup" placeholder="Enter pickup location">
+                
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination</label>
+                <img src="destination.png" alt="" height="27px" width="27px">
+                <input type="text" id="destination" placeholder="Enter destination">
+            </div>
+            <button class="btn">Compare Prices</button>
+            
+        </div>
+        <script>
+            // Redirect if user is not logged in
+            function checkLoginStatus() {
+                if (!localStorage.getItem("loggedInUser")) {
+                    alert("Please log in first!");
+                    window.location.href = "login.html"; // Redirect to login page
+                } else {
+                    alert("Fetching ride comparisons...");
+                }
+            }
+    
+            // Prevent access if user is not logged in
+            window.onload = function () {
+                if (!localStorage.getItem("loggedInUser")) {
+                    window.location.href = "login.html";
+                }
+            };
+        </script>
+    
+</body>
+</html>
