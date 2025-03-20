@@ -14,15 +14,31 @@
     </header>
 
     <main>
-        <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Enter username" required>
+        <h1>Sign Up</h1>
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="Enter username" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter password" required>
+            </div>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" placeholder="Enter password" required>
-
-        <button onclick="signUp()">Sign Up</button>
-
+            <div class="form-group">
+                <label for="contact">Contact Number:</label>
+                <input type="tel" id="contact" placeholder="Enter contact number" required>
+            </div>
+    
+            <button type="button" onclick="signUp()">Sign Up</button>
+        </form>
+    
         <p>Already have an account? <a href="login.html">Login here</a></p>
     </main>
+
+    <footer>
+        <p>&copy; 2025 Cab Price Comparison. All rights reserved.</p>
+    </footer>
 </body>
 </html>
