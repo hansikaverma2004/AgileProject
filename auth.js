@@ -1,8 +1,9 @@
 function signUp() {
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
+    let contact = document.getElementById("contact").value;
 
-    if (username === "" || password === "") {
+    if (username === "" || password === "" || contact === "") {
         alert("Please fill in all fields.");
         return;
     }
@@ -14,7 +15,7 @@ function signUp() {
         return;
     }
 
-    users.push({ username, password });
+    users.push({ username, password, contact });
     localStorage.setItem("users", JSON.stringify(users));
 
     alert("Signup successful! Redirecting to login.");
