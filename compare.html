@@ -5,26 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compare Cab Prices</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="script.js" defer></script>
     <script src="auth.js" defer></script>
 </head>
 <body onload="checkLogin()">
     <header>
         <h1>Cab Price Comparison</h1>
+        <button onclick="window.location.href='home.html'">Home</button>
         <button onclick="logOut()">Logout</button>
     </header>
 
     <main>
         <h2>Find the Best Cab Fare</h2>
-        <label for="pickup">Pickup Location:</label>
-        <input type="text" id="pickup" placeholder="Enter pickup location">
-        
-        <label for="destination">Destination:</label>
-        <input type="text" id="destination" placeholder="Enter destination">
-        
-        <button onclick="comparePrices()">Compare Prices</button>
-        
+        <form id="compareForm">
+            <div class="form-group">
+                <label for="pickup">Pickup Location:</label>
+                <input type="text" id="pickup" placeholder="Enter pickup location">
+            </div>
+    
+            <div class="form-group">
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" placeholder="Enter destination">
+            </div>
+    
+            <div class="form-group">
+                <label for="rideType">Ride Type:</label>
+                <select id="rideType">
+                    <option value="bike">🏍️ Bike </option>
+                    <option value="auto">🛺 Auto </option>
+                    <option value="car">🚗 Car   </option>
+                </select>
+            </div>
+    
+            <button type="button" onclick="comparePrices()">Compare Prices</button>
+        </form>
+    
         <div id="result"></div>
+    
+        <p>Have feedback? <a href="feedback.html">Click here</a> to share your thoughts.</p>
     </main>
+    <div id="loading" style="display: none;">
+        <div class="spinner"></div>
+    </div>
 </body>
 </html>
+<footer>
+    <p>&copy; 2025 Cab Price Comparison. All rights reserved.</p>
+</footer>
