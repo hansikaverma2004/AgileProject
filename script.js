@@ -1,7 +1,7 @@
 function comparePrices() {
     document.getElementById("loading").style.display = "flex";
+
     setTimeout(() => {
-        // Your existing logic here
         let pickup = document.getElementById("pickup").value.trim().toLowerCase();
         let destination = document.getElementById("destination").value.trim().toLowerCase();
         let rideType = document.getElementById("rideType").value;
@@ -23,7 +23,7 @@ function comparePrices() {
             "vijay nagar": 8,
             "palasia": 9,
             "it park": 1,
-            "rani sarai": 15,
+            "rani sati": 15,
             "lig": 7.5,
         };
 
@@ -37,30 +37,33 @@ function comparePrices() {
 
         let basePrices = {
             bike: 0,
-            auto: 0.5,
-            car: 1
+            auto: 5,
+            car: 15,
         };
 
         let rideTypeExtra = basePrices[rideType];
 
+        // **Fix: Convert randomFactor() output to number properly**
+        function randomFactor() {
+            return parseFloat((Math.random() * 2 - 1).toFixed(2)); // Ensures a numeric value
+        }
+
         let fares = [
-            { company: "Uber", price: (distance * (5.5 + rideTypeExtra)).toFixed(2) },
-            { company: "Ola", price: (distance * (5 + rideTypeExtra)).toFixed(2) },
-            { company: "Rapido", price: (distance * (4.5 + rideTypeExtra)).toFixed(2) },
+            { company: "Uber", price: (distance * (5.5 + rideTypeExtra + randomFactor())).toFixed(2), link: "https://www.uber.com/in/en/ride/" },
+            { company: "Ola", price: (distance * (5 + rideTypeExtra + randomFactor())).toFixed(2), link: "https://www.olacabs.com/" },
+            { company: "Rapido", price: (distance * (4.5 + rideTypeExtra + randomFactor())).toFixed(2), link: "https://www.rapido.bike/" },
         ];
 
-        let emergencyContacts = {
-            "sgsits college": "Police: 100, Ambulance: 102",
-            "railway station": "Police: 100, Railway Helpline: 139",
-            "bus stand": "Police: 100, Ambulance: 102",
-            "khajrana temple": "Police: 100, Temple Security: 123456789",
-            "patalpani waterfall": "Police: 100, Forest Department: 987654321",
-            "rajwada": "Police: 100, Tourist Helpline: 1800111363",
-            "bhawarkua": "Police: 100, Ambulance: 102",
-            "vijay nagar": "Police: 100, Ambulance: 102",
-            "palasia": "Police: 100, Ambulance: 102",
-            "rani sarai": "Police: 100, Ambulance: 102"
-        };
+        // **Fix: Ensure all fares are valid numbers**
+        fares = fares.map(cab => ({
+            ...cab,
+            price: isNaN(cab.price) ? "N/A" : cab.price  // If NaN, show "N/A" instead
+        }));
+
+        // Find the cheapest ride dynamically (ignoring N/A values)
+        let cheapest = fares
+            .filter(cab => cab.price !== "N/A")  // Ignore invalid fares
+            .reduce((min, cab) => (parseFloat(cab.price) < parseFloat(min.price) ? cab : min), fares[0]);
 
         let resultHTML = `<h3>Estimated Prices (for ${distance} km, ${rideType} ride):</h3><ul>`;
         fares.forEach(cab => {
@@ -68,10 +71,17 @@ function comparePrices() {
         });
         resultHTML += "</ul>";
 
-        resultHTML += `<h3>Emergency Contacts:</h3>`;
-        resultHTML += `<p>${emergencyContacts[pickup]}</p>`;
+        // "Book Now" button for the cheapest ride (if valid price)
+        if (cheapest.price !== "N/A") {
+            resultHTML += `<h3>Cheapest Option: ${cheapest.company} - ₹${cheapest.price}</h3>`;
+            resultHTML += `<a href="${cheapest.link}" target="_blank">
+                            <button style="margin-top: 10px; padding: 8px 15px; cursor: pointer; font-size: 16px;">Book Now</button>
+                          </a>`;
+        } else {
+            resultHTML += `<h3>Sorry, no valid fares available.</h3>`;
+        }
 
         document.getElementById("result").innerHTML = resultHTML;
         document.getElementById("loading").style.display = "none";
-    }, 1000); // Simulate a 1-second delay
+    }, 1000);
 }
