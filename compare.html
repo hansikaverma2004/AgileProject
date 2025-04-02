@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compare Cab Prices</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Add Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="script.js" defer></script>
-    <script src="auth.js" defer></script>
 </head>
 <body onload="checkLogin()">
     <header>
         <h1>Cab Price Comparison</h1>
+        <div>
         <button onclick="window.location.href='home.html'">Home</button>
         <button onclick="logOut()">Logout</button>
+        </div>
     </header>
 
     <main>
@@ -24,33 +23,38 @@
                 <label for="pickup">Pickup Location:</label>
                 <input type="text" id="pickup" placeholder="Enter pickup location">
             </div>
-    
+
             <div class="form-group">
                 <label for="destination">Destination:</label>
                 <input type="text" id="destination" placeholder="Enter destination">
             </div>
-    
+
             <div class="form-group">
                 <label for="rideType">Ride Type:</label>
                 <select id="rideType">
                     <option value="bike">🏍️ Bike </option>
                     <option value="auto">🛺 Auto </option>
-                    <option value="car">🚗 Car   </option>
+                    <option value="car">🚗 Car </option>
                 </select>
             </div>
-    
+
             <button type="button" onclick="comparePrices()">Compare Prices</button>
         </form>
-    
-        <div id="result"></div>
-    
+
+        <div id="loading" style="display: none;">
+            <div class="spinner"></div>
+        </div>
+
+        <div id="result"></div> <!-- Ye jagah ab Book Now button bhi show karega -->
+
         <p>Have feedback? <a href="feedback.html">Click here</a> to share your thoughts.</p>
     </main>
-    <div id="loading" style="display: none;">
-        <div class="spinner"></div>
-    </div>
+
+    <script src="auth.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
+
 <footer>
     <p>&copy; 2025 Cab Price Comparison. All rights reserved.</p>
 </footer>
